@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wasl · وصل</title>
+<meta name="description" content="Install Wasl, the offline Bluetooth messenger. ثبّت وصل، تطبيق المراسلة بالبلوتوث بدون إنترنت.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#e6e9df" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1519" media="(prefers-color-scheme: dark)">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+:root {
+  --font: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Noto Sans Arabic", "Noto Naskh Arabic", system-ui, sans-serif;
+  --wall: #e6e9df;
+  --wall-pat: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23567a74' stroke-opacity='.13' stroke-width='1.1'%3E%3Crect x='20' y='20' width='32' height='32'/%3E%3Crect x='20' y='20' width='32' height='32' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='4.5'/%3E%3Ccircle cx='0' cy='0' r='3'/%3E%3Ccircle cx='72' cy='0' r='3'/%3E%3Ccircle cx='0' cy='72' r='3'/%3E%3Ccircle cx='72' cy='72' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  --surface: #ffffff;
+  --ink: #12262a;
+  --ink-2: #4d6367;
+  --ink-3: #7d9094;
+  --line: rgba(18, 38, 42, .10);
+  --accent: #0a808a;
+  --accent-strong: #086c75;
+  --accent-soft: #dff1f1;
+  --on-accent: #ffffff;
+  --next-bg: #eaf6f6;
+  --warn-bg: #fbf1dc;
+  --warn-ink: #7a4f06;
+  --shadow: 0 1px 2px rgba(10, 40, 44, .06), 0 10px 30px rgba(10, 40, 44, .10);
+  --ring: #0a808a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --wall: #0b1519;
+    --wall-pat: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23a8d4d0' stroke-opacity='.075' stroke-width='1.1'%3E%3Crect x='20' y='20' width='32' height='32'/%3E%3Crect x='20' y='20' width='32' height='32' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='4.5'/%3E%3Ccircle cx='0' cy='0' r='3'/%3E%3Ccircle cx='72' cy='0' r='3'/%3E%3Ccircle cx='0' cy='72' r='3'/%3E%3Ccircle cx='72' cy='72' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    --surface: #16252a;
+    --ink: #e8f1f2;
+    --ink-2: #a3b8bd;
+    --ink-3: #7b9298;
+    --line: rgba(255, 255, 255, .10);
+    --accent: #3fc6ce;
+    --accent-strong: #0b8791;
+    --accent-soft: #123a40;
+    --on-accent: #ffffff;
+    --next-bg: #1a343a;
+    --warn-bg: #3a2d10;
+    --warn-ink: #f0c877;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
+    --ring: #3fc6ce;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--wall) var(--wall-pat);
+  background-size: 72px 72px;
+  background-position: center top;
+}
+html[lang="ar"] body { line-height: 1.75; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; color: inherit; }
+:focus { outline: none; }
+:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 10px; }
+
+/* language + platform visibility */
+html[lang="ar"] .en, html[lang="en"] .ar { display: none !important; }
+body[data-p="ios"] .pa, body[data-p="android"] .pi { display: none !important; }
+[hidden] { display: none !important; }
+bdi, .ui { font-weight: 600; }
+
+.wrap {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: max(14px, env(safe-area-inset-top)) 16px max(36px, env(safe-area-inset-bottom));
+}
+
+/* top bar */
+.top { display: flex; justify-content: flex-end; min-height: 44px; }
+.lang {
+  min-height: 44px; min-width: 88px; padding: 0 18px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink);
+  font-weight: 600; font-size: 15px; cursor: pointer;
+  box-shadow: 0 1px 2px rgba(10, 40, 44, .06);
+}
+
+/* header */
+.head { text-align: center; padding: 6px 8px 22px; }
+.logo { position: relative; width: 84px; height: 84px; margin: 0 auto 14px; }
+.logo img {
+  position: relative; z-index: 1;
+  width: 84px; height: 84px; display: block;
+  border-radius: 22%;
+  background: var(--accent);
+  box-shadow: 0 8px 24px rgba(8, 108, 117, .35);
+}
+.logo::before, .logo::after {
+  content: ""; position: absolute; inset: 0; border-radius: 28%;
+  border: 2px solid var(--accent); opacity: 0;
+  animation: ping 2.6s cubic-bezier(.2, .6, .3, 1) .3s 1 both;
+}
+.logo::after { animation-delay: .8s; }
+@keyframes ping {
+  0% { transform: scale(1); opacity: .55; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+h1 {
+  margin: 0; display: flex; justify-content: center; align-items: baseline; gap: 10px;
+  font-size: 34px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em;
+}
+html[lang="ar"] h1 { flex-direction: row-reverse; }
+h1 .dot { color: var(--accent); font-weight: 800; }
+h1 .nm-ar { font-size: 38px; }
+.nw { white-space: nowrap; }
+.tag { margin: 8px auto 0; max-width: 24em; font-size: 17px; color: var(--ink-2); text-wrap: balance; }
+
+/* platform switch */
+.seg {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; margin: 0 0 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(10, 40, 44, .05);
+}
+.seg button {
+  min-height: 48px; border: 0; border-radius: 12px; background: transparent;
+  font-weight: 650; font-size: 16px; color: var(--ink-2); cursor: pointer;
+}
+.seg button[aria-selected="true"] { background: var(--accent-strong); color: var(--on-accent); }
+.switch { text-align: center; margin: 0 0 12px; }
+.switch button {
+  min-height: 44px; padding: 0 14px; border: 0; background: none; cursor: pointer;
+  color: var(--accent-strong); font-weight: 600; font-size: 15px; text-decoration: underline; text-underline-offset: 4px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .switch button { color: var(--accent); } }
+
+/* the sheet */
+.sheet {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+  box-shadow: var(--shadow); padding: 14px;
+}
+.note {
+  display: flex; gap: 10px; align-items: flex-start;
+  margin: 0 0 12px; padding: 11px 14px; border-radius: 14px;
+  background: var(--accent-soft); color: var(--ink); font-size: 15px; line-height: 1.5;
+}
+html[lang="ar"] .note { line-height: 1.65; }
+.note svg { flex: none; width: 20px; height: 20px; margin-top: 2px; color: var(--accent); }
+.note.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.note.warn svg { color: currentColor; }
+
+/* buttons */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 0 22px; border-radius: 16px; border: 0;
+  background: var(--accent-strong); color: var(--on-accent);
+  font-size: 17px; font-weight: 700; text-decoration: none; text-align: center; cursor: pointer;
+  box-shadow: 0 6px 16px rgba(8, 108, 117, .28);
+  transition: transform .12s ease, background-color .12s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn svg { width: 22px; height: 22px; flex: none; }
+.btn.big { min-height: 68px; font-size: 20px; border-radius: 20px; }
+.btn.ghost {
+  min-height: 46px; font-size: 15px; font-weight: 650; box-shadow: none;
+  background: transparent; color: var(--accent-strong); border: 1.5px solid var(--accent-strong);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.ghost { color: var(--accent); border-color: var(--accent); } }
+@media (hover: hover) { .btn:hover { background: var(--accent); } .btn.ghost:hover { background: var(--accent-soft); } }
+.link {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px;
+  color: var(--accent-strong); font-size: 14px; font-weight: 600; text-underline-offset: 4px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .link { color: var(--accent); } }
+
+/* android hints */
+.hints { list-style: none; margin: 18px 0 4px; padding: 0; display: grid; gap: 4px; }
+.hints li { display: flex; gap: 14px; align-items: flex-start; padding: 8px 4px; font-size: 15.5px; color: var(--ink-2); }
+.hints .ic {
+  flex: none; width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-strong);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hints .ic { color: var(--accent); } }
+.hints .ic svg { width: 20px; height: 20px; }
+.hints p { margin: 0; padding-top: 7px; }
+
+/* iPhone checklist */
+.meter { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 4px 10px; }
+.meter h2 { margin: 0; font-size: 17px; font-weight: 750; }
+.meter .count { color: var(--ink-2); font-size: 15px; font-variant-numeric: tabular-nums; }
+.meter .count b { color: var(--accent-strong); font-size: 17px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .meter .count b { color: var(--accent); } }
+.reset { min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--ink-3); font-size: 14px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+
+.steps { list-style: none; margin: 0; padding: 0; }
+.steps li {
+  --dot: 44px;
+  position: relative; display: grid; grid-template-columns: var(--dot) 1fr; column-gap: 14px;
+  padding: 12px 10px 14px; border-radius: 18px;
+  transition: background-color .25s ease;
+}
+.steps li.next { background: var(--next-bg); }
+.steps li::before { /* rail: a line that fills teal as steps are ticked, linking each to the next */
+  content: ""; position: absolute; width: 3px; border-radius: 2px;
+  inset-inline-start: calc(10px + var(--dot) / 2 - 1.5px);
+  top: calc(12px + var(--dot) + 2px); bottom: -14px;
+  background: var(--line);
+  transition: background-color .3s ease;
+}
+.steps li:last-child::before { display: none; }
+.steps li.done::before { background: var(--accent); }
+.tick { position: relative; width: var(--dot); height: var(--dot); display: block; cursor: pointer; }
+.tick input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.tick .c {
+  position: absolute; inset: 0; border-radius: 50%; display: grid; place-items: center;
+  border: 2px solid var(--ink-3); background: var(--surface); color: var(--ink-2);
+  font-weight: 750; font-size: 18px; font-variant-numeric: tabular-nums;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+.tick .c svg { width: 22px; height: 22px; display: none; }
+.steps li.next .tick .c { border-color: var(--accent); color: var(--accent-strong); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .steps li.next .tick .c { color: var(--accent); } }
+.tick input:checked + .c { background: var(--accent-strong); border-color: var(--accent-strong); color: var(--on-accent); }
+.tick input:checked + .c .n { display: none; }
+.tick input:checked + .c svg { display: block; }
+.tick input:active + .c { transform: scale(.92); }
+.tick input:focus-visible + .c { outline: 3px solid var(--ring); outline-offset: 3px; }
+.steps .body { min-width: 0; padding-top: 2px; }
+.steps h3 { margin: 0; font-size: 18px; line-height: 1.4; font-weight: 750; }
+.steps h3 label { cursor: pointer; display: block; padding: 6px 0 4px; }
+.steps .sub { margin: 0 0 12px; color: var(--ink-2); font-size: 15px; }
+.steps .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.steps .acts .btn { flex: 1 1 100%; }
+.steps li.done .sub { color: var(--ink-3); }
+.steps li.done h3 { color: var(--ink-2); }
+.steps li.done .btn:not(.ghost) { background: var(--ink-3); box-shadow: none; }
+.steps li.done .acts, .steps li.done .sub { opacity: .8; }
+.steps li:not(.next):not(.done) .btn:not(.ghost) { box-shadow: none; }
+
+.finish {
+  margin: 6px 4px 2px; padding: 14px 16px; border-radius: 16px; background: var(--accent-soft);
+  font-weight: 700; text-align: center;
+}
+
+/* info + problems + safety */
+.every {
+  margin-top: 14px; padding: 16px 18px; border-radius: 20px;
+  background: var(--accent-soft); color: var(--ink);
+  border: 1px solid var(--line);
+}
+.every h2 { margin: 0 0 4px; font-size: 17px; font-weight: 750; display: flex; align-items: center; gap: 10px; }
+.every h2 svg { width: 22px; height: 22px; color: var(--accent-strong); flex: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .every h2 svg { color: var(--accent); } }
+.every p { margin: 0; color: var(--ink-2); font-size: 15px; }
+
+details {
+  margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(10, 40, 44, .05);
+}
+summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  min-height: 56px; padding: 0 18px; font-weight: 700; font-size: 17px; border-radius: 20px;
+}
+summary::-webkit-details-marker { display: none; }
+summary svg { width: 22px; height: 22px; color: var(--ink-3); transition: transform .2s ease; flex: none; }
+details[open] summary svg { transform: rotate(180deg); }
+.probs { padding: 0 18px 8px; display: grid; gap: 0; }
+.probs div { padding: 12px 0; border-top: 1px solid var(--line); }
+.probs b { display: block; font-size: 15.5px; font-weight: 700; margin-bottom: 2px; }
+.probs span.t { color: var(--ink-2); font-size: 15px; }
+.probs a { color: var(--accent-strong); font-weight: 600; text-underline-offset: 3px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .probs a { color: var(--accent); } }
+
+.safe { margin: 16px 6px 0; display: flex; gap: 10px; color: var(--ink-2); font-size: 14px; line-height: 1.6; }
+.safe svg { flex: none; width: 20px; height: 20px; margin-top: 3px; color: var(--accent-strong); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .safe svg { color: var(--accent); } }
+.safe p { margin: 0; }
+
+footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 13.5px; min-height: 22px; }
+
+@media (min-width: 700px) {
+  .wrap { max-width: 580px; padding-top: 28px; }
+  .head { padding-bottom: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body data-p="ios">
+<div class="wrap">
+
+  <div class="top">
+    <button class="lang" id="lang" type="button" aria-label="Language / اللغة">
+      <span class="ar">English</span><span class="en">عربي</span>
+    </button>
+  </div>
+
+  <header class="head">
+    <div class="logo"><img src="icon.png" width="84" height="84" alt=""></div>
+    <h1><span class="nm-en">Wasl</span><span class="dot" aria-hidden="true">·</span><span class="nm-ar" lang="ar">وصل</span></h1>
+    <p class="tag">
+      <span class="ar"><span class="nw">دردش مع أصدقائك القريبين —</span> <span class="nw">بدون إنترنت</span></span>
+      <span class="en"><span class="nw">Chat with friends nearby —</span> <span class="nw">no internet needed</span></span>
+    </p>
+  </header>
+
+  <main>
+    <div class="seg" id="seg" role="tablist" hidden>
+      <button type="button" role="tab" data-p="ios" aria-selected="true">iPhone</button>
+      <button type="button" role="tab" data-p="android" aria-selected="false">Android</button>
+    </div>
+    <div class="switch" id="switch" hidden>
+      <button type="button" class="pi" data-go="android"><span class="ar">هل تستخدم أندرويد؟</span><span class="en">On Android instead?</span></button>
+      <button type="button" class="pa" data-go="ios"><span class="ar">هل تستخدم آيفون؟</span><span class="en">On iPhone instead?</span></button>
+    </div>
+
+    <!-- ANDROID -->
+    <section class="sheet pa" aria-label="Android">
+      <a class="btn big" id="apk" href="https://github.com/Morexxe-sudo/wasl-ios/releases/latest/download/Wasl.apk" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+        <span class="ar">نزّل وصل للأندرويد</span><span class="en">Download Wasl for Android</span>
+      </a>
+      <ul class="hints">
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.500 3 8 7 10 4-2 7-5.500 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <p><span class="ar">إذا سأل المتصفح، اسمح بالتثبيت من هذا المصدر.</span><span class="en">If your browser asks, allow installing from it.</span></p>
+        </li>
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.500-5.800-6.500-11a6.500 6.500 0 0 1 13 0c0 5.200-6.500 11-6.500 11z"/><circle cx="12" cy="10" r="2.400"/></svg></span>
+          <p><span class="ar">افتحه واسمح بكل الأذونات، وأبقِ <bdi>Location</bdi> شغّالاً.</span><span class="en">Open it, allow all permissions, and keep <bdi>Location</bdi> on.</span></p>
+        </li>
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="16" height="9" rx="2.500"/><path d="M21 11v3"/><path d="M7 11.500v2"/></svg></span>
+          <p><span class="ar">على هونر / هواوي / شاومي: اسمح له بالعمل في الخلفية: الإعدادات ← التطبيقات ← وصل ← البطارية / التشغيل التلقائي ← السماح.</span><span class="en">On Honor / Huawei / Xiaomi, let it run in the background: <bdi>Settings → Apps → Wasl → Battery / Launch</bdi> → allow.</span></p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- IPHONE -->
+    <section class="pi" aria-label="iPhone">
+      <div class="sheet">
+        <div class="note" id="osnote">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+          <span class="ar" id="osnote-ar">يحتاج <bdi>iOS 27</bdi> أو أحدث.</span>
+          <span class="en" id="osnote-en">Needs <bdi>iOS 27</bdi> or newer.</span>
+        </div>
+
+        <div class="meter">
+          <h2><span class="ar">٥ خطوات</span><span class="en">5 steps</span></h2>
+          <span class="count" aria-live="polite"><span dir="ltr"><b id="done-n">0</b> / 5</span>
+            <button type="button" class="reset" id="reset" hidden><span class="ar">من البداية</span><span class="en">Start over</span></button></span>
+        </div>
+
+        <ol class="steps" id="steps">
+          <li data-i="0">
+            <span class="tick"><input type="checkbox" id="t0" aria-labelledby="h0"><span class="c" aria-hidden="true"><span class="n">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
+            <div class="body">
+              <h3 id="h0"><label for="t0"><span class="ar">حمّل <bdi>SideInstaller</bdi></span><span class="en">Get SideInstaller</span></label></h3>
+              <p class="sub">
+                <span class="ar">اختر أي شهادة؛ إذا فشلت جرّب غيرها. ثم الإعدادات ← عام ← <bdi>VPN</bdi> وإدارة الجهاز ← ثِق بها.</span>
+                <span class="en">Pick any certificate; if one fails, try another. Then <bdi>Settings → General → VPN &amp; Device Management</bdi> → trust it.</span>
+              </p>
+              <div class="acts"><a class="btn" href="https://sideinstaller.net" target="_blank" rel="noopener"><span class="ar">افتح <bdi>SideInstaller</bdi></span><span class="en">Open SideInstaller</span></a></div>
+            </div>
+          </li>
+          <li data-i="1">
+            <span class="tick"><input type="checkbox" id="t1" aria-labelledby="h1"><span class="c" aria-hidden="true"><span class="n">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
+            <div class="body">
+              <h3 id="h1"><label for="t1"><span class="ar">حمّل <bdi>LocalDevVPN</bdi></span><span class="en">Get LocalDevVPN</span></label></h3>
+              <p class="sub">
+                <span class="ar">افتحه واضغط <bdi>Connect</bdi>.</span>
+                <span class="en">Open it and tap <bdi>Connect</bdi>.</span>
+              </p>
+              <div class="acts">
+                <a class="btn" id="vpn" href="itms-apps://search.itunes.com/WebObjects/MZSearch.woa/wa/search?media=software&amp;term=LocalDevVPN"><span class="ar">افتح <bdi>App Store</bdi></span><span class="en">Open App Store</span></a>
+                <a class="link" href="https://apps.apple.com/search?term=LocalDevVPN" target="_blank" rel="noopener"><span class="ar">لم يفتح؟ استخدم هذا الرابط</span><span class="en">Didn’t open? Use this link</span></a>
+              </div>
+            </div>
+          </li>
+          <li data-i="2">
+            <span class="tick"><input type="checkbox" id="t2" aria-labelledby="h2"><span class="c" aria-hidden="true"><span class="n">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
+            <div class="body">
+              <h3 id="h2"><label for="t2"><span class="ar">ثبّت <bdi>SideStore</bdi></span><span class="en">Install SideStore</span></label></h3>
+              <p class="sub" style="margin-bottom:2px">
+                <span class="ar">افتح <bdi>SideInstaller</bdi> ← سجّل بحساب Apple (المجاني يكفي) ← اضغط <bdi>Install SideStore</bdi>. إذا طلب الاقتران: الإعدادات ← الخصوصية والأمان ← وضع المطوّر ← <bdi>Pair</bdi> وأدخل الرمز.</span>
+                <span class="en">Open SideInstaller → sign in with your Apple ID (free is fine) → tap <bdi>Install SideStore</bdi>. If it asks to pair: <bdi>Settings → Privacy &amp; Security → Developer Mode → Pair</bdi>, enter the code.</span>
+              </p>
+            </div>
+          </li>
+          <li data-i="3">
+            <span class="tick"><input type="checkbox" id="t3" aria-labelledby="h3"><span class="c" aria-hidden="true"><span class="n">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
+            <div class="body">
+              <h3 id="h3"><label for="t3"><span class="ar">ثبّت وصل</span><span class="en">Install Wasl</span></label></h3>
+              <p class="sub">
+                <span class="ar">سيفتح <bdi>SideStore</bdi> ويثبّت التطبيق.</span>
+                <span class="en"><bdi>SideStore</bdi> opens and installs the app.</span>
+              </p>
+              <div class="acts">
+                <a class="btn" id="install" href="#"><span class="ar">ثبّت وصل</span><span class="en">Install Wasl</span></a>
+                <a class="btn ghost" id="source" href="#"><span class="ar">تحديثات تلقائية</span><span class="en">Get automatic updates</span></a>
+              </div>
+            </div>
+          </li>
+          <li data-i="4">
+            <span class="tick"><input type="checkbox" id="t4" aria-labelledby="h4"><span class="c" aria-hidden="true"><span class="n">5</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
+            <div class="body">
+              <h3 id="h4"><label for="t4"><span class="ar">افتح وصل</span><span class="en">Open Wasl</span></label></h3>
+              <p class="sub" style="margin-bottom:2px">
+                <span class="ar">اسمح بالبلوتوث والإشعارات. انتهى 🎉</span>
+                <span class="en">Allow Bluetooth and notifications. Done 🎉</span>
+              </p>
+            </div>
+          </li>
+        </ol>
+        <div class="finish" id="finish" hidden><span class="ar">كل شيء جاهز. استمتع بوصل!</span><span class="en">All set. Enjoy Wasl!</span></div>
+      </div>
+
+      <div class="every">
+        <h2>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.500-5.800"/><path d="M20 4v5h-5"/></svg>
+          <span class="ar">كل ٧ أيام</span><span class="en">Every 7 days</span>
+        </h2>
+        <p>
+          <span class="ar">افتح <bdi>SideStore</bdi> واضغط <bdi>Refresh All</bdi> (أو فعّل <bdi>Background Refresh</bdi> من إعدادات <bdi>SideStore</bdi>). يحتاج Wi‑Fi للحظة.</span>
+          <span class="en">Open <bdi>SideStore</bdi> and tap <bdi>Refresh All</bdi> (or turn on <bdi>Background Refresh</bdi> in SideStore settings). Needs Wi‑Fi for a moment.</span>
+        </p>
+      </div>
+
+      <details>
+        <summary>
+          <span><span class="ar">مشاكل؟</span><span class="en">Problems?</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="probs">
+          <div>
+            <b><span class="ar">شهادة <bdi>SideInstaller</bdi> ملغاة</span><span class="en">SideInstaller certificate revoked</span></b>
+            <span class="t"><span class="ar">جرّب شهادة ثانية، أو استخدم <a href="https://mirazbakis.github.io/AltLoad/" target="_blank" rel="noopener">AltLoad</a>.</span><span class="en">Try another certificate, or use <a href="https://mirazbakis.github.io/AltLoad/" target="_blank" rel="noopener">AltLoad</a>.</span></span>
+          </div>
+          <div>
+            <b><span class="ar">«تعذّر الوصول» / <bdi>Couldn’t reach</bdi></span><span class="en">“Couldn’t reach…”</span></b>
+            <span class="t"><span class="ar">وصّل <bdi>LocalDevVPN</bdi> وأنت على Wi‑Fi.</span><span class="en">Connect <bdi>LocalDevVPN</bdi> while on Wi‑Fi.</span></span>
+          </div>
+          <div>
+            <b><span class="ar">انتهت صلاحية التطبيق</span><span class="en">App expired</span></b>
+            <span class="t"><span class="ar">افتح <bdi>SideStore</bdi> ← <bdi>Refresh</bdi>.</span><span class="en">Open <bdi>SideStore</bdi> → <bdi>Refresh</bdi>.</span></span>
+          </div>
+        </div>
+      </details>
+
+      <div class="safe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.500 3 8 7 10 4-2 7-5.500 7-10V6z"/></svg>
+        <p>
+          <span class="ar">ثبّت <bdi>SideInstaller</bdi> من <bdi>sideinstaller.net</bdi> فقط. حساب Apple يُستخدم فقط لتوقيع التطبيق على هاتفك.</span>
+          <span class="en">Only install SideInstaller from <bdi>sideinstaller.net</bdi>. Your Apple ID is used only to sign the app on your phone.</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="ver" aria-live="off"></footer>
+</div>
+
+<script>
+(function () {
+  var doc = document.documentElement, body = document.body;
+  var $ = function (s) { return document.querySelector(s); };
+  var KEY_L = 'wasl.lang', KEY_T = 'wasl.ticks';
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  /* ---- language ---- */
+  var lang = get(KEY_L);
+  if (lang !== 'ar' && lang !== 'en') {
+    var nl = (navigator.language || 'ar').toLowerCase();
+    lang = nl.indexOf('ar') === 0 ? 'ar' : (navigator.language ? 'en' : 'ar');
+  }
+  function applyLang() {
+    doc.lang = lang; doc.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = lang === 'ar' ? 'وصل · Wasl' : 'Wasl · وصل';
+    renderVersion();
+  }
+
+  /* ---- platform ---- */
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1);
+  var isAnd = /Android/.test(ua);
+  var detected = isIOS || isAnd;
+  function setPlat(p) {
+    body.setAttribute('data-p', p);
+    var tabs = document.querySelectorAll('#seg button');
+    for (var i = 0; i < tabs.length; i++) tabs[i].setAttribute('aria-selected', String(tabs[i].getAttribute('data-p') === p));
+  }
+  setPlat(isAnd ? 'android' : 'ios');
+  $('#seg').hidden = detected;
+  $('#switch').hidden = !detected;
+
+  $('#seg').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-p]'); if (b) setPlat(b.getAttribute('data-p'));
+  });
+  $('#switch').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-go]'); if (b) setPlat(b.getAttribute('data-go'));
+  });
+
+  /* ---- iOS version notice (UA may be frozen, so wording stays soft) ---- */
+  var m = ua.match(/OS (\d+)_/);
+  if (isIOS && m && parseInt(m[1], 10) < 27) {
+    var n = $('#osnote'); n.className = 'note warn';
+    $('#osnote-ar').innerHTML = 'تأكد أن هاتفك على <bdi>iOS 27</bdi> أو أحدث قبل أن تبدأ (الإعدادات ← عام ← تحديث البرنامج).';
+    $('#osnote-en').innerHTML = 'Make sure you’re on <bdi>iOS 27</bdi> or newer before you start (<bdi>Settings → General → Software Update</bdi>).';
+  }
+
+  /* ---- links ---- */
+  var REL = 'https://github.com/Morexxe-sudo/wasl-ios/releases/latest/download/Wasl.ipa';
+  var SRC = 'https://morexxe-sudo.github.io/wasl-ios/source.json';
+  $('#install').href = 'sidestore://install?url=' + encodeURIComponent(REL);
+  $('#source').href = 'sidestore://source?url=' + encodeURIComponent(SRC);
+
+  /* ---- checklist ---- */
+  var boxes = document.querySelectorAll('#steps input');
+  var items = document.querySelectorAll('#steps li');
+  var ticks = [];
+  try { ticks = JSON.parse(get(KEY_T) || '[]'); } catch (e) { ticks = []; }
+  if (!Array.isArray(ticks)) ticks = [];
+  for (var i = 0; i < boxes.length; i++) boxes[i].checked = ticks[i] === true;
+
+  function paint() {
+    var done = 0, next = -1, st = [];
+    for (var i = 0; i < boxes.length; i++) {
+      var on = boxes[i].checked; st.push(on);
+      if (on) done++; else if (next < 0) next = i;
+      items[i].classList.toggle('done', on);
+    }
+    for (var j = 0; j < items.length; j++) items[j].classList.toggle('next', j === next);
+    $('#done-n').textContent = done;
+    $('#reset').hidden = done === 0;
+    $('#finish').hidden = done !== boxes.length;
+    return st;
+  }
+  paint();
+  for (var k = 0; k < boxes.length; k++) boxes[k].addEventListener('change', function () { set(KEY_T, JSON.stringify(paint())); });
+  $('#reset').addEventListener('click', function () {
+    for (var i = 0; i < boxes.length; i++) boxes[i].checked = false;
+    set(KEY_T, JSON.stringify(paint()));
+  });
+
+  /* ---- version footer ---- */
+  var ver = null;
+  function renderVersion() {
+    var f = $('#ver');
+    if (!ver) { f.textContent = ''; return; }
+    var t = (lang === 'ar' ? 'الإصدار ' : 'Version ') + ver.v;
+    if (ver.d) {
+      try {
+        var d = new Date(ver.d);
+        if (!isNaN(d)) t += ' · ' + d.toLocaleDateString(lang === 'ar' ? 'ar-IQ-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      } catch (e) {}
+    }
+    f.textContent = t;
+  }
+  try {
+    fetch('./source.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      var v = j && j.apps && j.apps[0] && j.apps[0].versions && j.apps[0].versions[0];
+      if (v && v.version) { ver = { v: String(v.version), d: v.date || '' }; renderVersion(); }
+    }).catch(function () {});
+  } catch (e) {}
+
+  $('#lang').addEventListener('click', function () {
+    lang = lang === 'ar' ? 'en' : 'ar'; set(KEY_L, lang); applyLang();
+  });
+  applyLang();
+})();
+</script>
+</body>
+</html>

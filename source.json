@@ -1,0 +1,39 @@
+{
+  "name": "Wasl",
+  "identifier": "app.wasl.source",
+  "sourceURL": "https://morexxe-sudo.github.io/wasl-ios/source.json",
+  "iconURL": "https://morexxe-sudo.github.io/wasl-ios/icon.png",
+  "website": "https://morexxe-sudo.github.io/wasl-ios",
+  "tintColor": "0a808a",
+  "apps": [
+    {
+      "name": "Wasl",
+      "bundleIdentifier": "app.wasl.ios",
+      "developerName": "Wasl",
+      "subtitle": "Chat with friends nearby, no internet needed",
+      "localizedDescription": "Offline Telegram-style messenger over Bluetooth and Wi-Fi. Messages hop phone to phone, end-to-end encrypted. Works with Android and iPhone.",
+      "iconURL": "https://morexxe-sudo.github.io/wasl-ios/icon.png",
+      "tintColor": "0a808a",
+      "category": "social",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "buildVersion": "1",
+          "date": "2026-11-12",
+          "localizedDescription": "First release: chat, photos, files with resume, nearby, privacy",
+          "downloadURL": "https://github.com/Morexxe-sudo/wasl-ios/releases/download/v1.0.0-1/Wasl.ipa",
+          "size": 532691,
+          "minOSVersion": "16.0"
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {
+          "NSBluetoothAlwaysUsageDescription": "Wasl uses Bluetooth to find friends nearby and deliver messages without internet.",
+          "NSLocalNetworkUsageDescription": "Wasl uses the local Wi-Fi network for fast file transfers between nearby phones."
+        }
+      }
+    }
+  ],
+  "news": []
+}
