@@ -20,7 +20,7 @@
           "version": "1.0.0",
           "buildVersion": "1",
           "date": "2026-11-12",
-          "localizedDescription": "First release: chat, photos, files with resume, nearby, privacy",
+          "localizedDescription": "Android 0.2: voice notes, photo compression, diagnostics, Arabic UI, keyboard fix",
           "downloadURL": "https://github.com/Morexxe-sudo/wasl-ios/releases/download/v1.0.0-1/Wasl.ipa",
           "size": 532691,
           "minOSVersion": "16.0"
