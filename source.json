@@ -19,8 +19,8 @@
         {
           "version": "1.0.0",
           "buildVersion": "1",
-          "date": "2026-11-20",
-          "localizedDescription": "Wasl 0.4: Phone repeater. Nearby phones relay your messages and files to contacts out of range, across chains of up to 4 phones (on by default, Settings → Phone repeater). Files now download from several phones at once and every piece is verified.",
+          "date": "2026-11-21",
+          "localizedDescription": "Hopper 0.5 (formerly Wasl). New Telegram-style look, end-to-end encrypted voice calls, stickers (import from WhatsApp and Telegram), face unlock, and a repeater network that grows with the crowd: every phone relays fairly, up to 12 hops, and stays gentle on Bluetooth headphones.",
           "downloadURL": "https://github.com/Morexxe-sudo/wasl-ios/releases/download/v1.0.0-1/Wasl.ipa",
           "size": 562259,
           "minOSVersion": "16.0"

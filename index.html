@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Wasl · وصل</title>
-<meta name="description" content="Install Wasl, the offline Bluetooth messenger. ثبّت وصل، تطبيق المراسلة بالبلوتوث بدون إنترنت.">
+<title>Hopper</title>
+<meta name="description" content="Install Hopper, the offline Bluetooth messenger. ثبّت Hopper، تطبيق المراسلة بالبلوتوث بدون إنترنت.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#e6e9df" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1519" media="(prefers-color-scheme: dark)">
@@ -118,8 +118,6 @@ h1 {
   font-size: 34px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em;
 }
 html[lang="ar"] h1 { flex-direction: row-reverse; }
-h1 .dot { color: var(--accent); font-weight: 800; }
-h1 .nm-ar { font-size: 38px; }
 .nw { white-space: nowrap; }
 .tag { margin: 8px auto 0; max-width: 24em; font-size: 17px; color: var(--ink-2); text-wrap: balance; }
 
@@ -305,7 +303,7 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
 
   <header class="head">
     <div class="logo"><img src="icon.png" width="84" height="84" alt=""></div>
-    <h1><span class="nm-en">Wasl</span><span class="dot" aria-hidden="true">·</span><span class="nm-ar" lang="ar">وصل</span></h1>
+    <h1 lang="en" dir="ltr">Hopper</h1>
     <p class="tag">
       <span class="ar"><span class="nw">دردش مع أصدقائك القريبين —</span> <span class="nw">بدون إنترنت</span></span>
       <span class="en"><span class="nw">Chat with friends nearby —</span> <span class="nw">no internet needed</span></span>
@@ -324,9 +322,9 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
 
     <!-- ANDROID -->
     <section class="sheet pa" aria-label="Android">
-      <a class="btn big" id="apk" href="https://github.com/Morexxe-sudo/wasl-ios/releases/latest/download/Wasl.apk" rel="noopener">
+      <a class="btn big" id="apk" href="https://github.com/Morexxe-sudo/wasl-ios/releases/latest/download/Hopper.apk" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
-        <span class="ar">نزّل وصل للأندرويد</span><span class="en">Download Wasl for Android</span>
+        <span class="ar">نزّل <bdi>Hopper</bdi> للأندرويد</span><span class="en">Download Hopper for Android</span>
       </a>
       <ul class="hints">
         <li>
@@ -339,7 +337,7 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
         </li>
         <li>
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="16" height="9" rx="2.500"/><path d="M21 11v3"/><path d="M7 11.500v2"/></svg></span>
-          <p><span class="ar">على هونر / هواوي / شاومي: اسمح له بالعمل في الخلفية: الإعدادات ← التطبيقات ← وصل ← البطارية / التشغيل التلقائي ← السماح.</span><span class="en">On Honor / Huawei / Xiaomi, let it run in the background: <bdi>Settings → Apps → Wasl → Battery / Launch</bdi> → allow.</span></p>
+          <p><span class="ar">على هونر / هواوي / شاومي: اسمح له بالعمل في الخلفية: الإعدادات ← التطبيقات ← <bdi>Hopper</bdi> ← البطارية / التشغيل التلقائي ← السماح.</span><span class="en">On Honor / Huawei / Xiaomi, let it run in the background: <bdi>Settings → Apps → Hopper → Battery / Launch</bdi> → allow.</span></p>
         </li>
       </ul>
     </section>
@@ -398,13 +396,13 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
           <li data-i="3">
             <span class="tick"><input type="checkbox" id="t3" aria-labelledby="h3"><span class="c" aria-hidden="true"><span class="n">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
             <div class="body">
-              <h3 id="h3"><label for="t3"><span class="ar">ثبّت وصل</span><span class="en">Install Wasl</span></label></h3>
+              <h3 id="h3"><label for="t3"><span class="ar">ثبّت <bdi>Hopper</bdi></span><span class="en">Install Hopper</span></label></h3>
               <p class="sub">
                 <span class="ar">سيفتح <bdi>SideStore</bdi> ويثبّت التطبيق.</span>
                 <span class="en"><bdi>SideStore</bdi> opens and installs the app.</span>
               </p>
               <div class="acts">
-                <a class="btn" id="install" href="#"><span class="ar">ثبّت وصل</span><span class="en">Install Wasl</span></a>
+                <a class="btn" id="install" href="#"><span class="ar">ثبّت <bdi>Hopper</bdi></span><span class="en">Install Hopper</span></a>
                 <a class="btn ghost" id="source" href="#"><span class="ar">تحديثات تلقائية</span><span class="en">Get automatic updates</span></a>
               </div>
             </div>
@@ -412,7 +410,7 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
           <li data-i="4">
             <span class="tick"><input type="checkbox" id="t4" aria-labelledby="h4"><span class="c" aria-hidden="true"><span class="n">5</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span></span>
             <div class="body">
-              <h3 id="h4"><label for="t4"><span class="ar">افتح وصل</span><span class="en">Open Wasl</span></label></h3>
+              <h3 id="h4"><label for="t4"><span class="ar">افتح <bdi>Hopper</bdi></span><span class="en">Open Hopper</span></label></h3>
               <p class="sub" style="margin-bottom:2px">
                 <span class="ar">اسمح بالبلوتوث والإشعارات. انتهى 🎉</span>
                 <span class="en">Allow Bluetooth and notifications. Done 🎉</span>
@@ -420,7 +418,7 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
             </div>
           </li>
         </ol>
-        <div class="finish" id="finish" hidden><span class="ar">كل شيء جاهز. استمتع بوصل!</span><span class="en">All set. Enjoy Wasl!</span></div>
+        <div class="finish" id="finish" hidden><span class="ar">كل شيء جاهز. استمتع بـ<bdi>Hopper</bdi>!</span><span class="en">All set. Enjoy Hopper!</span></div>
       </div>
 
       <div class="every">
@@ -484,7 +482,7 @@ footer { text-align: center; margin-top: 22px; color: var(--ink-2); font-size: 1
   }
   function applyLang() {
     doc.lang = lang; doc.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.title = lang === 'ar' ? 'وصل · Wasl' : 'Wasl · وصل';
+    document.title = 'Hopper';
     renderVersion();
   }
 
