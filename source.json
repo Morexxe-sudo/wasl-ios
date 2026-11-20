@@ -19,10 +19,10 @@
         {
           "version": "1.0.0",
           "buildVersion": "1",
-          "date": "2026-11-12",
-          "localizedDescription": "Android 0.2: voice notes, photo compression, diagnostics, Arabic UI, keyboard fix",
+          "date": "2026-11-20",
+          "localizedDescription": "Android v0.3: encrypted links and sealed sender, long-range Bluetooth (Coded PHY) where supported, Wi-Fi Aware, range test, app lock and panic wipe.",
           "downloadURL": "https://github.com/Morexxe-sudo/wasl-ios/releases/download/v1.0.0-1/Wasl.ipa",
-          "size": 532691,
+          "size": 562259,
           "minOSVersion": "16.0"
         }
       ],
