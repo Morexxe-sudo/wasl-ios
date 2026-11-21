@@ -1,0 +1,39 @@
+[package]
+name = "hopperdeep"
+version = "0.1.0"
+edition = "2021"
+description = "deep1: lossless re-compression of already-compressed file formats for Hopper"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+name = "hopperdeep"
+crate-type = ["lib", "cdylib"]
+
+[[bin]]
+name = "hopperdeep"
+path = "src/bin/hopperdeep.rs"
+
+[dependencies]
+# Exact versions; the companion Cargo.lock pins the full graph.
+preflate-rs = "=0.7.6"
+lepton_jpeg = "=0.5.8"
+zstd = { version = "=0.13.3", features = ["zstdmt"] }
+rayon = "=1.11.0"
+jni = "=0.21.1"
+sha2 = "=0.10.9"
+# Test/CLI fixture generation only (also a transitive dependency of lepton_jpeg).
+flate2 = "=1.1.11"
+
+# Tests decode/encode up to a GiB of data; unoptimised sha2/zstd/preflate would take minutes.
+[profile.dev]
+opt-level = 2
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+panic = "unwind"
+# v0.7 C2: drop debug symbols from the shipped cdylibs (JNI exports live in .dynsym and survive).
+# Keeps the APK within budget; does not change codec behaviour.
+strip = "symbols"
