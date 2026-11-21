@@ -20,7 +20,7 @@
           "version": "1.0.0",
           "buildVersion": "1",
           "date": "2026-11-21",
-          "localizedDescription": "Hopper 0.5 (formerly Wasl). New Telegram-style look, end-to-end encrypted voice calls, stickers (import from WhatsApp and Telegram), face unlock, and a repeater network that grows with the crowd: every phone relays fairly, up to 12 hops, and stays gentle on Bluetooth headphones.",
+          "localizedDescription": "Hopper 0.6: the Telegram look (blue/green palette, bubbles with tails, wallpaper, floating tabs), instant chat switching with no 'Loading' flicker, smoother scrolling, compressed file and folder sending (files shrink before they travel and open full size), and a faster, gap-free transfer engine.",
           "downloadURL": "https://github.com/Morexxe-sudo/wasl-ios/releases/download/v1.0.0-1/Wasl.ipa",
           "size": 562259,
           "minOSVersion": "16.0"
