@@ -20,7 +20,7 @@
           "version": "1.0.0",
           "buildVersion": "1",
           "date": "2026-11-21",
-          "localizedDescription": "Hopper 0.6: the Telegram look (blue/green palette, bubbles with tails, wallpaper, floating tabs), instant chat switching with no 'Loading' flicker, smoother scrolling, compressed file and folder sending (files shrink before they travel and open full size), and a faster, gap-free transfer engine.",
+          "localizedDescription": "Hopper 0.6.1: Telegram-style back (slide, swipe from the left, no flicker), keyboard and emoji panel without jumps, tap a message for its menu and long-press to select (with Forward), long-press menu no longer vanishes, smoother chat scrolling, no 'N chats' line.",
           "downloadURL": "https://github.com/Morexxe-sudo/wasl-ios/releases/download/v1.0.0-1/Wasl.ipa",
           "size": 562259,
           "minOSVersion": "16.0"
